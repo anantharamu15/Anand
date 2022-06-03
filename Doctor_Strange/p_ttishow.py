@@ -5,12 +5,11 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from pyrogram.errors.exceptions.bad_request_400 import MessageTooLong, PeerIdInvalid
 from pyrogram.errors import UserNotParticipant
 from info import ADMINS, LOG_CHANNEL, SUPPORT_CHAT, MELCOW_NEW_USERS, AUTH_CHANNEL
-from database.users_chats_db import db
-from database.ia_filterdb import Media
+from Cluster.users_chats_db import db
+from Cluster.ia_filterdb import Media
 from utils import get_size, temp, get_settings
 from Script import script
 
-force_sub = "Mr_Movies_Main"
 
 @Client.on_message(filters.new_chat_members & filters.group)
 async def save_group(bot, message):
@@ -273,26 +272,3 @@ async def list_chats(bot, message):
             outfile.write(out)
         await message.reply_document('chats.txt', caption="List Of Chats")
 
-@Client.on_message(filters.command("start") & filters.incoming)
-async def start(client, message):
-    if force_sub:   
-        try:                        
-            user = await client.get_chat_member(force_sub, message.from_user.id)
-            if user.status == "kicked":
-               await message.reply_text("Sorry, You're Banned")
-               return
-        except UserNotParticipant:
-            await message.reply_text(
-                text="**Please Clike 👇 below and Join My Updates Channel and go to back my group and retry please 🙏. താഴെ കാണുന്ന buttonil click ചെയ്ത്നി ങ്ങൾ ഞങ്ങളുടെ ചാനലിൽ join ചെയ്യണം 🙏 എന്നിട്ട് ഗ്രൂപ്പിൽ പോയി വീണ്ടും try ചെയ്യൂ 🙏**",
-                reply_markup=InlineKeyboardMarkup([
-                    [ InlineKeyboardButton(text="📢𝙹𝚘𝚒𝚗 𝙼𝚢 𝚄𝚙𝚍𝚊𝚝𝚎 𝙲𝚑𝚊𝚗𝚗𝚎𝚕📢", url=f"https://t.me/{force_sub}")]
-              ])
-            )
-            return
-    if not await db.is_user_exist(message.from_user.id):
-        await db.add_user(message.from_user.id, message.from_user.first_name)
-        await client.send_message(LOG_CHANNEL, script.LOG_TEXT_P.format(message.from_user.id, message.from_user.mention, message.from_user.username))
-    if len(message.command) != 2:        
-        await message.reply_chat_action("Typing")
-        m=await message.reply_sticker("CAACAgUAAxkBAAEVHZhia01M5UFL_xlg-Cjk0Rzs8I3DKgACxgQAAqcTSVZu0qqO1wWVKx4E")
-    
