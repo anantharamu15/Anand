@@ -1,1 +1,1 @@
-worker: bash strange.sh
+worker: python3 bot.py
