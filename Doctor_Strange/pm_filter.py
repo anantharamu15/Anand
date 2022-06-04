@@ -815,7 +815,7 @@ async def auto_filter(client, msg, spoll=False):
         cap = f"<b>🎬 Title:</b> {search}\n\n<b>👥 Requested by: {message.from_user.mention}</b>\n<b>© Powered by: <a href='https://t.me/+y53tWFUw6Q43NzE9'>{message.chat.title}</a></b>\n\n<b>✍️ Note:</b> <s>This message will be Auto-deleted after 5 minutes to avoid copyright issues.</s>"
     if imdb and imdb.get('poster'):
         try:
-            hehe = await message.reply_text(text=cap, reply_markup=InlineKeyboardMarkup(btn))
+            hehe = await message.reply_text(text=cap, reply_markup=InlineKeyboardMarkup(btn),disable_web_page_preview=True,)
             await asyncio.sleep(IMDB_DELET_TIME)
             await hehe.delete()
             joji = await message.reply_text(text=f"⚙️ Fɪʟᴛᴇʀ Fᴏʀ {search} Cʟᴏꜱᴇᴅ 🗑️", disable_notification = True)
