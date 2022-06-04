@@ -28,6 +28,8 @@ logger.setLevel(logging.ERROR)
 BUTTONS = {}
 SPELL_CHECK = {}
 FILTER_MODE = {}
+BTN = InlineKeyboardMarkup([[ InlineKeyboardButton('🚀 𝙾𝚄𝚁 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 🚀', url='https://t.me/mkn_bots_updates') ]])
+                    
 
 @Client.on_message(filters.command('autofilter') & filters.user(ADMINS))
 async def fil_mod(client, message):
@@ -453,7 +455,8 @@ async def cb_handler(client: Client, query: CallbackQuery):
                         chat_id=CH_FILTER,
                         file_id=file_id,
                         caption=f'<b>Hey 👋 {query.from_user.mention}</b>\n<b>File Name:</b>🔘 size - {title}\n<b>↬ Size:</b> {size}\n𝘛𝘩𝘪𝘴 𝘔𝘦𝘴𝘴𝘢𝘨𝘦 𝘸𝘪𝘭𝘭 𝘣𝘦 𝘈𝘶𝘵𝘰-𝘥𝘦𝘭𝘦𝘵𝘦𝘥 𝘢𝘧𝘵𝘦𝘳 5 𝘔𝘪𝘯𝘶𝘵𝘦𝘴 𝘵𝘰 𝘈𝘷𝘰𝘪𝘥 𝘊𝘰𝘱𝘺𝘳𝘪𝘨𝘩𝘵 𝘐𝘴𝘴𝘶𝘦𝘴 & 𝘋𝘰𝘯𝘵 𝘧𝘰𝘳𝘨𝘦𝘵 𝘵𝘰 𝘍𝘰𝘳𝘸𝘢𝘳𝘥 𝘵𝘩𝘦 𝘧𝘪𝘭𝘦 𝘵𝘰 𝘚𝘢𝘷𝘦𝘥 𝘔𝘦𝘴𝘴𝘢𝘨𝘦𝘴 𝘣𝘦𝘧𝘰𝘳𝘦 𝘋𝘦𝘭𝘦𝘵𝘦.!\n\n {f_caption}',
-                        protect_content=True if ident == "filep" else False 
+                        protect_content=True if ident == "filep" else False,
+                        reply_markup=BTN
                     )
                     msg1 = await query.message.reply(
                     f'<b>Hey 👋{query.from_user.mention}\n'
