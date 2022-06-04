@@ -1,7 +1,7 @@
 from pyrogram import filters, Client
 from Cluster.sql import setWelcome
 
-@Client.on_message(filters.command(["setwelcome"]) & filters.group & filters.reply)
+@Client.on_message(filters.command("setwelcome") & filters.group & filters.reply)
 async def setWelcome(client, message):
     #if len(message.command) == 1:
     if(message.reply_to_message):
