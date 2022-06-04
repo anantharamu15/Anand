@@ -239,7 +239,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         ) 
            
     elif query.data == "pages":
-        await query.answer("കൗതുകം ലേശം കൂടുതലാണല്ലേ 👀")
+        await query.answer("കൗതുകം ലേശം കൂടുതലാണല്ലേ 👀", show_alert=True)
     
 async def auto_filter(client, msg, spoll=False):
     if not spoll:
