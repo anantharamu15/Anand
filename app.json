@@ -104,7 +104,7 @@
             "value": "True",
             "required": false
         },
-        "START_MSG": {
+        "START_TXT": {
             "description": "bot start message text",
             "value": "🤩🤩",
             "required": false        
