@@ -531,7 +531,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await query.message.edit_text(
-            text=script.START_TXT.format(mention = message.from_user.mention if message.from_user else message.chat.title, bot_name = temp.B_NAME),
+            text=script.START_TXT.format(mention = query.from_user.mention if message.from_user else message.chat.title, bot_name = temp.B_NAME),
             reply_markup=reply_markup,
             parse_mode='html'
         )
