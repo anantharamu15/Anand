@@ -33,15 +33,16 @@ async def start(client, message):
             ]
             ]
         reply_markup = InlineKeyboardMarkup(buttons)
+        disable_web_page_preview = True,
         await message.reply(script.START_TXT.format(mention = message.from_user.mention if message.from_user else message.chat.title, bot_name = temp.B_NAME), reply_markup=reply_markup)
         if not await db.get_chat(message.chat.id):
             total=await client.get_chat_members_count(message.chat.id)
-            await client.send_message(LOG_CHANNEL, script.LOG_TEXT_G.format(message.chat.title, message.chat.id, message.chat.username, total, temp.B_NAME, "Unknown"))       
-            await db.add_chat(message.chat.id, message.chat.title)
+            await client.send_message(LOG_CHANNEL, script.LOG_TEXT_G.format(message.chat.title, message.chat.id, message.chat.username, total, temp.U_NAME, "Unknown"))       
+            await db.add_chat(message.chat.id, message.chat.title, message.chat.username)
         return 
     if not await db.is_user_exist(message.from_user.id):
         await db.add_user(message.from_user.id, message.from_user.first_name)
-        await client.send_message(LOG_CHANNEL, script.LOG_TEXT_P.format(message.from_user.id, message.from_user.mention, temp.B_NAME))
+        await client.send_message(LOG_CHANNEL, script.LOG_TEXT_P.format(message.from_user.id, message.from_user.mention, message.from_user.username, temp.U_NAME))
     if len(message.command) != 2:
         buttons = [[
             InlineKeyboardButton('➕ 𝙰𝙳𝙳 𝙼𝙴 𝚃𝙾 𝚈𝙾𝚄𝚁 𝙶𝚁𝙾𝚄𝙿 ➕', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
