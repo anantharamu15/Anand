@@ -11,17 +11,15 @@ from sqlalchemy.sql.expression import column
 from sqlalchemy.sql.sqltypes import PickleType
 
 database_url = urlparse(database_url)._replace(scheme="postgresql").geturl()
-
 engine = create_engine(database_url, echo=False)
 
 
-class groups():
-    def setWelcome(group_id, welcome):
-        try:
-            with engine.connect() as conn:
-                groups.add(group_id)
-                return(conn.execute(groupsTable.update(None).where(
-                    groupsTable.c.groupid == group_id).values(welcome=welcome)))
-        except Exception as E:
-            print(E)
-            return False
+def setWelcome(group_id, welcome):
+    try:
+        with engine.connect() as conn:
+            groups.add(group_id)
+            return(conn.execute(groupsTable.update(None).where(
+                groupsTable.c.groupid == group_id).values(welcome=welcome)))
+    except Exception as E:
+        print(E)
+        return False
