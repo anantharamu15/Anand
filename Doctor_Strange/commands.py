@@ -18,6 +18,9 @@ logger = logging.getLogger(__name__)
 
 BATCH_FILES = {}
 
+BTN = InlineKeyboardMarkup([[ InlineKeyboardButton('🚀 𝙾𝚄𝚁 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 🚀', url='https://t.me/mkn_bots_updates') ]])
+                    
+
 @Client.on_message(filters.command("start"))
 async def start(client, message):
     if message.chat.type in ['group', 'supergroup']:
@@ -216,10 +219,7 @@ async def start(client, message):
             f_caption = f"<code>{title}</code>"
             if CUSTOM_FILE_CAPTION:
                 try:
-                    f_caption=CUSTOM_FILE_CAPTION.format(file_name= '' if title is None else title, file_size='' if size is None else size, file_caption='')
-                    cap_buttons = [[
-                            InlineKeyboardButton('🚀 𝙾𝚄𝚁 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 🚀', url='https://t.me/mkn_bots_updates')
-                    ]]
+                    f_caption=CUSTOM_FILE_CAPTION.format(file_name= '' if title is None else title, file_size='' if size is None else size, file_caption='')                    
                 except:
                     return
             await msg.edit_caption(f_caption)
@@ -244,7 +244,7 @@ async def start(client, message):
         file_id=file_id,
         caption=f_caption,        
         protect_content=True if pre == 'filep' else False,
-        reply_markup=InlineKeyboardMarkup(cap_buttons)
+        reply_markup=BTN
         )
                     
 
