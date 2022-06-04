@@ -100,7 +100,7 @@ async def give_filter(client,message):
             await auto_filter(client, message)  
 
 
-@Client.on_callback_query(filters.regex(r"^next"))
+@Client.on_callback_query(filters.regex(r"^next") & filters.group)
 async def next_page(bot, query):
     ident, req, key, offset = query.data.split("_")
     if int(req) not in [query.from_user.id, 0]:
@@ -190,7 +190,7 @@ async def next_page(bot, query):
     await query.answer()
 
 
-@Client.on_callback_query(filters.regex(r"^spolling"))
+@Client.on_callback_query(filters.regex(r"^spolling") & filters.group)
 async def advantage_spoll_choker(bot, query):
     _, user, movie_ = query.data.split('#')
     if int(user) != 0 and query.from_user.id != int(user):
@@ -732,7 +732,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             await query.message.edit_reply_markup(reply_markup)
     await query.answer('Piracy Is Crime')
 
-
+@Client.on_message(filters.group)
 async def auto_filter(client, msg, spoll=False):
     if not spoll:
         message = msg
@@ -923,7 +923,7 @@ async def advantage_spell_chok(msg):
     await msg.reply("I couldn't find anything related to that\nDid you mean any one of these?",
                     reply_markup=InlineKeyboardMarkup(btn))
 
-
+@Client.on_message(filters.group)
 async def manual_filters(client, message, text=False):
     group_id = message.chat.id
     name = text or message.text
