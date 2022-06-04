@@ -543,6 +543,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         ], [
             InlineKeyboardButton('📢 𝙶𝙾𝚁𝚄𝙿 𝚂𝙴𝚃𝚃𝙸𝙽𝙶𝚂', callback_data='coct')
         ], [
+            InlineKeyboardButton('🗳️ 𝙵𝙸𝙻𝙴 𝚂𝚃𝙾𝚁𝙴', callback_data='newdata')
             InlineKeyboardButton('♂️ 𝙴𝚇𝚃𝚁𝙰 𝙼𝙾𝙳𝚂', callback_data='extra')
         ], [
             InlineKeyboardButton('🏠 𝙷𝙾𝙼𝙴', callback_data='start'),
@@ -570,6 +571,9 @@ async def cb_handler(client: Client, query: CallbackQuery):
         )
     elif query.data == "source":
         buttons = [[
+            InlineKeyboardButton('❣️ 𝙾𝚁𝙸𝙶𝙸𝙽𝙰𝙻 𝚁𝙴𝙿𝙾 ❣️', url='https://github.com/MrMKN/Doctor_Strange-BOT')
+            ],[
+            InlineKeyboardButton('🔐 𝙲𝙻𝙾𝚂𝙴', callback_data='close_data'),  
             InlineKeyboardButton('🔙 𝙱𝙰𝙲𝙺', callback_data='about')
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
@@ -627,6 +631,16 @@ async def cb_handler(client: Client, query: CallbackQuery):
         reply_markup = InlineKeyboardMarkup(buttons)
         await query.message.edit_text(
             text=script.EXTRAMOD_TXT,
+            reply_markup=reply_markup,
+            parse_mode='html'   
+        )
+    elif query.data == "newdata":
+        buttons = [[
+            InlineKeyboardButton('𝙱𝙰𝙲𝙺', callback_data='help')
+        ]]
+        reply_markup = InlineKeyboardMarkup(buttons)
+        await query.message.edit_text(
+            text=script.FILE_TXT,
             reply_markup=reply_markup,
             parse_mode='html'
         )
