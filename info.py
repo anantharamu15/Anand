@@ -81,7 +81,7 @@ DOWNLOAD_LOCATION = environ.get("DOWNLOAD_LOCATION", "./DOWNLOADS/AudioBoT/")
 MAX_RIST_BTNS = int(environ.get('MAX_RIST_BTNS', "10"))
 CH_LINK = environ.get('CH_LINK', "")
 CH_FILTER = int(environ.get('CH_FILTER', 0))
-
+START_TXT = environ.get("START_TXT", "👋 𝙷𝙴𝙻𝙾 {mention}\n\n𝙼𝚈 𝙽𝙰𝙼𝙴 𝙸𝚂 {bot_name},\n𝙸 𝙲𝙰𝙽 𝙿𝚁𝙾𝚅𝙸𝙳𝙴 𝙼𝙾𝚅𝙸𝙴𝚂, 𝙹𝚄𝚂𝚃 𝙰𝙳𝙳 𝙼𝙴 𝚃𝙾 𝚈𝙾𝚄𝚁 𝙶𝚁𝙾𝚄𝙿 𝙰𝙽𝙳 𝙼𝙰𝙺𝙴 𝙼𝙴 𝙰𝙳𝙼𝙸𝙽...")
 
 
 # Others
