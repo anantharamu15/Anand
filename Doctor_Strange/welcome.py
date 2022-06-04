@@ -7,7 +7,8 @@ async def setWelcome(client, message):
         setWelcome(message.chat.id, message.reply_to_message)
         await message.reply_text("Successfully set the welcome message")
     else:
-        message.text = " ".join(message.command[1:])
-        setWelcome(message.chat.id, message)
-        await message.reply_text(f"Successfully set the welcome message to: {' '.join(message.command[1:])}")
+        await message.reply_text("reply to text")
+       # message.text = " ".join(message.command[1:])
+       # setWelcome(message.chat.id, message)
+      #  await message.reply_text(f"Successfully set the welcome message to: {' '.join(message.command[1:])}")
 
