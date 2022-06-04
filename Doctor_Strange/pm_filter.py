@@ -8,7 +8,7 @@ import pyrogram
 from Cluster.connections_mdb import active_connection, all_connections, delete_connection, if_active, make_active, \
     make_inactive
 from info import ADMINS, AUTH_CHANNEL, AUTH_USERS, CUSTOM_FILE_CAPTION, AUTH_GROUPS, P_TTI_SHOW_OFF, IMDB, \
-    SINGLE_BUTTON, SPELL_CHECK_REPLY, IMDB_TEMPLATE, CH_FILTER, CH_LINK
+    SINGLE_BUTTON, SPELL_CHECK_REPLY, IMDB_TEMPLATE, CH_FILTER, CH_LINK, IMDB_DELET_TIME
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 from pyrogram import Client, filters
 from pyrogram.errors import FloodWait, UserIsBlocked, MessageNotModified, PeerIdInvalid
@@ -441,7 +441,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
                     ms = await client.send_cached_media(
                         chat_id=CH_FILTER,
                         file_id=file_id,
-                        caption=f'<b>Hey 👋 {query.from_user.mention}</b>\n<b>File Name:</b>🔘 size - {title}\n<b>↬ Size:</b> {size}\n𝘛𝘩𝘪𝘴 𝘔𝘦𝘴𝘴𝘢𝘨𝘦 𝘸𝘪𝘭𝘭 𝘣𝘦 𝘈𝘶𝘵𝘰-𝘥𝘦𝘭𝘦𝘵𝘦𝘥 𝘢𝘧𝘵𝘦𝘳 5 𝘔𝘪𝘯𝘶𝘵𝘦𝘴 𝘵𝘰 𝘈𝘷𝘰𝘪𝘥 𝘊𝘰𝘱𝘺𝘳𝘪𝘨𝘩𝘵 𝘐𝘴𝘴𝘶𝘦𝘴 & 𝘋𝘰𝘯𝘵 𝘧𝘰𝘳𝘨𝘦𝘵 𝘵𝘰 𝘍𝘰𝘳𝘸𝘢𝘳𝘥 𝘵𝘩𝘦 𝘧𝘪𝘭𝘦 𝘵𝘰 𝘚𝘢𝘷𝘦𝘥 𝘔𝘦𝘴𝘴𝘢𝘨𝘦𝘴 𝘣𝘦𝘧𝘰𝘳𝘦 𝘋𝘦𝘭𝘦𝘵𝘦.!\n\nRequested Group - <b>{query.message.chat.title}</b>\n\n<i>\n=========== • ✠ • ===========\n▫️ ɢʀᴏᴜᴘ : @mknmovies \n▫️ ᴄʜᴀɴɴᴇʟ : @Mr_Movies_Main\n=========== • ✠ • ============</i>',
+                        caption=f'<b>Hey 👋 {query.from_user.mention}</b>\n<b>File Name:</b>🔘 size - {title}\n<b>↬ Size:</b> {size}\n𝘛𝘩𝘪𝘴 𝘔𝘦𝘴𝘴𝘢𝘨𝘦 𝘸𝘪𝘭𝘭 𝘣𝘦 𝘈𝘶𝘵𝘰-𝘥𝘦𝘭𝘦𝘵𝘦𝘥 𝘢𝘧𝘵𝘦𝘳 5 𝘔𝘪𝘯𝘶𝘵𝘦𝘴 𝘵𝘰 𝘈𝘷𝘰𝘪𝘥 𝘊𝘰𝘱𝘺𝘳𝘪𝘨𝘩𝘵 𝘐𝘴𝘴𝘶𝘦𝘴 & 𝘋𝘰𝘯𝘵 𝘧𝘰𝘳𝘨𝘦𝘵 𝘵𝘰 𝘍𝘰𝘳𝘸𝘢𝘳𝘥 𝘵𝘩𝘦 𝘧𝘪𝘭𝘦 𝘵𝘰 𝘚𝘢𝘷𝘦𝘥 𝘔𝘦𝘴𝘴𝘢𝘨𝘦𝘴 𝘣𝘦𝘧𝘰𝘳𝘦 𝘋𝘦𝘭𝘦𝘵𝘦.!\n\n (f_caption)',
                         protect_content=True if ident == "filep" else False 
                     )
                     msg1 = await query.message.reply(
@@ -449,22 +449,22 @@ async def cb_handler(client: Client, query: CallbackQuery):
                     f'<b>📫 Yᴏuʀ Fɪʟᴇ ɪꜱ Rᴇᴀᴅʏ 👇\n\n'
                     f'<b>↬ ғɪʟᴇ ɴᴀᴍᴇ: </b>{title}\n'
                     f'<b>↬ sɪᴢᴇ:</b> {size}\n\n'
-                    '𝘛𝘩𝘪𝘴 𝘍𝘪𝘭𝘦 𝘸𝘪𝘭𝘭 𝘣𝘦 𝘋𝘦𝘭𝘦𝘵𝘦𝘥 𝘪𝘯 5 𝘔𝘪𝘯𝘶𝘵𝘦𝘴.!\nതാഴെ ഉള്ള click to download അമർത്തി പിന്നീട് വരുന്ന\nചാനലിൽ നിന്ന് file saved മെസ്സേജിലേക്ക് മാറ്റി download ചെയ്യുക \n⚠️ copyright കാരണം മൂവി 5mint ൽ delet ആകും ⚠️!',
+                    '𝘛𝘩𝘪𝘴 𝘍𝘪𝘭𝘦 𝘸𝘪𝘭𝘭 𝘣𝘦 𝘋𝘦𝘭𝘦𝘵𝘦𝘥 𝘪𝘯 {IMDB_DELET_TIME} seconds.!\nതാഴെ ഉള്ള click to download അമർത്തി പിന്നീട് വരുന്ന\nചാനലിൽ നിന്ന് file saved മെസ്സേജിലേക്ക് മാറ്റി download ചെയ്യുക \n⚠️ copyright കാരണം മൂവി 5mint ൽ delet ആകും ⚠️!',
                     True,
                     'html',
                     reply_markup=InlineKeyboardMarkup(
                         [
                             [
-                                InlineKeyboardButton("📥 𝐂𝐥𝐢𝐜𝐤 𝐇𝐞𝐫𝐞 𝐭𝐨 𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝 𝐭𝐡𝐞 𝐅𝐢𝐥𝐞 📥", url = ms.link)
+                                InlineKeyboardButton("🚀 𝐂𝐥𝐢𝐜𝐤 𝐇𝐞𝐫𝐞 𝐭𝐨 𝐆𝐞𝐭 𝐅𝐢𝐥𝐞 🚀", url = ms.link)
                             ],
                             [
-                                InlineKeyboardButton("⚠️ 𝐂𝐚𝐧'𝐭 𝐕𝐢𝐞𝐰 𝐓𝐡𝐞 𝐅𝐢𝐥𝐞 ❓ 𝐂𝐥𝐢𝐜𝐤 𝐇𝐞𝐫𝐞 ⚠️", url = f"{CH_LINK}")
+                                InlineKeyboardButton("😔 𝐂𝐚𝐧'𝐭 𝐕𝐢𝐞𝐰 𝐓𝐡𝐞 𝐅𝐢𝐥𝐞 ❓ 𝐂𝐥𝐢𝐜𝐤 𝐇𝐞𝐫𝐞 🤩", url = f"{CH_LINK}")
                             ]
                         ]
                     )
                 )
                 await query.answer('Check Out The Chat',show_alert=False)
-                await asyncio.sleep(300)
+                await asyncio.sleep(IMDB_DELET_TIME)
                 await msg1.delete()
                 await msg.delete()
                 del msg1, msg
