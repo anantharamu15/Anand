@@ -543,7 +543,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         ], [
             InlineKeyboardButton('📢 𝙶𝙾𝚁𝚄𝙿 𝚂𝙴𝚃𝚃𝙸𝙽𝙶𝚂', callback_data='coct')
         ], [
-            InlineKeyboardButton('🗳️ 𝙵𝙸𝙻𝙴 𝚂𝚃𝙾𝚁𝙴', callback_data='newdata')
+            InlineKeyboardButton('🗳️ 𝙵𝙸𝙻𝙴 𝚂𝚃𝙾𝚁𝙴', callback_data='newdata'),
             InlineKeyboardButton('♂️ 𝙴𝚇𝚃𝚁𝙰 𝙼𝙾𝙳𝚂', callback_data='extra')
         ], [
             InlineKeyboardButton('🏠 𝙷𝙾𝙼𝙴', callback_data='start'),
