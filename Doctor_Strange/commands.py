@@ -242,9 +242,9 @@ async def start(client, message):
     await client.send_cached_media(
         chat_id=message.from_user.id,
         file_id=file_id,
-        caption=f_caption,
-        reply_markup=InlineKeyboardMarkup(cap_buttons)
+        caption=f_caption,        
         protect_content=True if pre == 'filep' else False,
+        reply_markup=InlineKeyboardMarkup(cap_buttons)
         )
                     
 
