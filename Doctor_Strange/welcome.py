@@ -1,14 +1,16 @@
-from pyrogram import filters, Client
-from Cluster.sql import setWelcome
+import os
+from pyrogram import Client, filters
+from pyrogram.types import Message, User
 
-@Client.on_message(filters.command("setwelcome") & filters.group & filters.reply)
-async def setWelcome(client, message):
-    #if len(message.command) == 1:
-    if(message.reply_to_message):
-        setWelcome(message.chat.id, message.reply_to_message)
-        await message.reply_text("Successfully set the welcome message")
-    else:
-        await message.reply_text("reply to text")
-       # message.text = " ".join(message.command[1:])
-       # setWelcome(message.chat.id, message)
-      #  await message.reply_text(f"Successfully set the welcome message to: {' '.join(message.command[1:])}")
+
+
+@Client.on_message(filters.new_chat_members)
+async def welcome(bot,message):
+	chatid= message.chat.id
+	await bot.send_message(text=f"Welcome {message.from_user.mention} to {message.chat.username} ,  Happy to have here",chat_id=chatid)
+	
+@Client.on_message(filters.left_chat_member)
+async def goodbye(bot,message):
+	chatid= message.chat.id
+	await bot.send_message(text=f"Bye ,  {message.from_user.mention} , Have a Nice Day",chat_id=chatid)
+	
