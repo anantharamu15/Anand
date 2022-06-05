@@ -83,7 +83,7 @@ CH_LINK = environ.get('CH_LINK', "")
 CH_FILTER = int(environ.get('CH_FILTER', 0))
 START_TXT = environ.get("START_TXT", "👋 𝙷𝙴𝙻𝙾 {mention}\n\n𝙼𝚈 𝙽𝙰𝙼𝙴 𝙸𝚂 {bot_name},\n𝙸 𝙲𝙰𝙽 𝙿𝚁𝙾𝚅𝙸𝙳𝙴 𝙼𝙾𝚅𝙸𝙴𝚂, 𝙹𝚄𝚂𝚃 𝙰𝙳𝙳 𝙼𝙴 𝚃𝙾 𝚈𝙾𝚄𝚁 𝙶𝚁𝙾𝚄𝙿 𝙰𝙽𝙳 𝙼𝙰𝙺𝙴 𝙼𝙴 𝙰𝙳𝙼𝙸𝙽...")
 BTN_LOCK_TEXT = environ.get("BTN_LOCK_TEXT", "𝙏𝙝𝙖𝙩'𝙨 𝙉𝙤𝙩 𝙁𝙤𝙧 𝙔𝙤𝙪. 𝙋𝙡𝙚𝙖𝙨𝙚 𝙍𝙚𝙦𝙪𝙚𝙨𝙩 𝙔𝙤𝙪𝙧 𝙊𝙬𝙣. ഇത് നിങ്ങൾ search ചെയ്തതല്ല നിങ്ങൾക് വേണ്ടത് നിങ്ങൾ search ചെയ്യൂ 🙏.")
-GOOD_BYE = environ.get("GOOD_BYE", "👋 Hello Mr {user} ❣️\nwelcome to {chat.name} 🤩")
+GOOD_BYE = environ.get("GOOD_BYE", "👋 Hello Mr {user_mention} ❣️\nwelcome to {chat_name} 🤩")
 WELCOME = environ.get("WELCOME", "Oh {user} OkBey SeU sooN")
 
 
