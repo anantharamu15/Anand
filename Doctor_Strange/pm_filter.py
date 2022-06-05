@@ -29,6 +29,8 @@ BUTTONS = {}
 SPELL_CHECK = {}
 PM_FILTER_MODE = {}
 
+from Doctor_Strange.group_filter import auto_filter
+
 #@Client.on_message(filters.command('pmautofilter'))
 #async def fil_mod(client, message):
 #      pm_mode_on = ["yes", "on", "true"]
