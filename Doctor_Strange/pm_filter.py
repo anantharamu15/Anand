@@ -29,7 +29,7 @@ BUTTONS = {}
 SPELL_CHECK = {}
 FILTER_MODE = {}
 
-@Client.on_message(filters.command('autofilter') & filters.user(ADMINS))
+@Client.on_message(filters.command('autofilter'))
 async def fil_mod(client, message):
       mode_on = ["yes", "on", "true"]
       mode_of = ["no", "off", "false"]
@@ -51,7 +51,7 @@ async def fil_mod(client, message):
       else:
           await m.edit("Use: `/autofilter on` or `/autofilter off`")
 
-@Client.on_message(filters.group | filters.private & filters.text & filters.incoming)
+@Client.on_message(filters.private & filters.text & filters.incoming)
 async def give_filter(client,message):
     group_id = message.chat.id
     name = message.text
@@ -748,7 +748,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             await query.message.edit_reply_markup(reply_markup)
     await query.answer('Piracy Is Crime')
 
-@Client.on_message(filters.group)
+
 async def auto_filter(client, msg, spoll=False):
     if not spoll:
         message = msg
@@ -885,7 +885,7 @@ async def auto_filter(client, msg, spoll=False):
         await joji.delete()
 
 
-@Client.on_message(filters.group)
+
 async def advantage_spell_chok(msg):
     query = re.sub(
         r"\b(pl(i|e)*?(s|z+|ease|se|ese|(e+)s(e)?)|((send|snd|giv(e)?|gib)(\sme)?)|movie(s)?|new|latest|br((o|u)h?)*|^h(e|a)?(l)*(o)*|mal(ayalam)?|t(h)?amil|file|that|find|und(o)*|kit(t(i|y)?)?o(w)?|thar(u)?(o)*w?|kittum(o)*|aya(k)*(um(o)*)?|full\smovie|any(one)|with\ssubtitle(s)?)",
@@ -939,7 +939,7 @@ async def advantage_spell_chok(msg):
     await msg.reply("I couldn't find anything related to that\nDid you mean any one of these?",
                     reply_markup=InlineKeyboardMarkup(btn))
 
-@Client.on_message(filters.group)
+
 async def manual_filters(client, message, text=False):
     group_id = message.chat.id
     name = text or message.text
