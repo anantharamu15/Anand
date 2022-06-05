@@ -366,16 +366,13 @@ async def cb_handler(client: Client, query: CallbackQuery):
 async def auto_filter(client, msg, spoll=False):
     if not spoll:
         message = msg
-        settings = await get_settings(message.chat.id)
         if message.text.startswith("/"): return  # ignore commands
         if re.findall("((^\/|^,|^!|^\.|^[\U0001F600-\U000E007F]).*)", message.text):
             return            
     else:
-        settings = await get_settings(msg.message.chat.id)
         message = msg.message.reply_to_message  # msg will be callback query
         search, files, offset, total_results = spoll
-    pre = 'pfilep' if settings['file_secure'] else 'pfile'
-    if settings["button"]:
+    pre = 'pfile'
         btn = [
             [
                 InlineKeyboardButton(
@@ -530,42 +527,3 @@ async def advantage_spell_chok(msg):
                     reply_markup=InlineKeyboardMarkup(btn))
 
 
-async def manual_filters(client, message, text=False):
-    group_id = message.chat.id
-    name = text or message.text
-    reply_id = message.reply_to_message.message_id if message.reply_to_message else message.message_id
-    keywords = await get_filters(group_id)
-    for keyword in reversed(sorted(keywords, key=len)):
-        pattern = r"( |^|[^\w])" + re.escape(keyword) + r"( |$|[^\w])"
-        if re.search(pattern, name, flags=re.IGNORECASE):
-            reply_text, btn, alert, fileid = await find_filter(group_id, keyword)
-
-            if reply_text:
-                reply_text = reply_text.replace("\\n", "\n").replace("\\t", "\t")
-
-            if btn is not None:
-                try:
-                    if fileid == "None":
-                        if btn == "[]":
-                            su = await client.send_message(group_id, reply_text, disable_web_page_preview=True)
-                            await asyncio.sleep(15)
-                            await su.delete()
-                        else:
-                            button = eval(btn)
-                            kurup = await client.send_message(group_id, reply_text, disable_web_page_preview=True, reply_markup=InlineKeyboardMarkup(button), reply_to_message_id=reply_id)
-                            await asyncio.sleep(15)
-                            await kurup.delete()
-                    elif btn == "[]":
-                        dhamu = await client.send_cached_media(group_id, fileid, caption=reply_text or "", reply_to_message_id=reply_id)
-                        await asyncio.sleep(15)
-                        await dhamu.delete()
-                    else:
-                        button = eval(btn)
-                        ramu = await message.reply_cached_media(fileid, caption=reply_text or "", reply_markup=InlineKeyboardMarkup(button), reply_to_message_id=reply_id)
-                        await asyncio.sleep(15)
-                        await ramu.delete()
-                except Exception as e:
-                    logger.exception(e)
-                break
-    else:
-        return False
