@@ -115,13 +115,13 @@
             "required": false
         },
         "WELCOME": {
-            "description": "custom group welcome messege (new user neme use this code= `{user}` / your group name use this code= `{chat}`)",
-            "value": "True",
+            "description": "custom group welcome messege (new user neme use this code= {user} / your group name use this code= {chat})",
+            "value": "👋 Hello Mr {user} ❣️\n\nwelcome to {chat} 🤩",
             "required": false        
         },
         "P_TTI_SHOW_OFF": {
             "description": "Customize Result Buttons to BOT PM or Send file in pm(True = BOT PM OFF/ False = BOT PM ON)",
-            "value": "👋 Hello Mr {user} ❣️\n\nwelcome to {chat} 🤩",
+            "value": "True",
             "required": false
         }
     },
