@@ -28,8 +28,6 @@ logger.setLevel(logging.ERROR)
 BUTTONS = {}
 SPELL_CHECK = {}
 FILTER_MODE = {}
-BTN = InlineKeyboardMarkup([[ InlineKeyboardButton('🚀 𝙾𝚄𝚁 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 🚀', 'url=https://t.me/mkn_bots_updates') ]])
-                    
 
 @Client.on_message(filters.command('autofilter') & filters.user(ADMINS))
 async def fil_mod(client, message):
@@ -518,7 +516,8 @@ async def cb_handler(client: Client, query: CallbackQuery):
             chat_id=CH_FILTER,
             file_id=file_id,
             caption=f_caption,
-            protect_content=True if ident == 'checksubp' else False
+            protect_content=True if ident == 'checksubp' else False,
+            reply_markup=InlineKeyboardMarkup([[ InlineKeyboardButton('🚀 𝙾𝚄𝚁 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 🚀', url='https://t.me/mkn_bots_updates') ]])      
         )
     elif query.data == "pages":
         await query.answer("😁 Curiosity is a little more, isn't it? 👀", show_alert=True)
