@@ -25,12 +25,10 @@ import logging
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.ERROR)
 
-invite_link = await client.create_chat_invite_link(int(AUTH_CHANNEL))
-
 BUTTONS = {}
 SPELL_CHECK = {}
 FILTER_MODE = {}
-BTN = InlineKeyboardMarkup([[ InlineKeyboardButton('🚀 𝙾𝚄𝚁 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 🚀', url=invite_link.invite_link) ]])
+BTN = InlineKeyboardMarkup([[ InlineKeyboardButton('🚀 𝙾𝚄𝚁 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 🚀', 'url=https://t.me/mkn_bots_updates') ]])
                     
 
 @Client.on_message(filters.command('autofilter') & filters.user(ADMINS))
