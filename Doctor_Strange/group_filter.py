@@ -445,12 +445,12 @@ async def cb_handler(client: Client, query: CallbackQuery):
                 if AUTH_CHANNEL and not await is_subscribed(client, query):
                     await query.answer(url=f"https://t.me/{temp.U_NAME}?start={ident}_{file_id}")
                     return
-                elif settings['botpm']:
-                    await query.answer(url=f"https://t.me/{temp.U_NAME}?start={ident}_{file_id}")
-                    return
+                #elif settings['botpm']:
+                    #await query.answer(url=f"https://t.me/{temp.U_NAME}?start={ident}_{file_id}")
+                    #return
                 else:
                     ms = await client.send_cached_media(
-                        chat_id=CH_FILTER,
+                        chat_id=query.from_user.id,
                         file_id=file_id,
                         caption=f"Hey 👋 {query.from_user.mention}\n\n𝘛𝘩𝘪𝘴 𝘔𝘦𝘴𝘴𝘢𝘨𝘦 𝘸𝘪𝘭𝘭 𝘣𝘦 𝘈𝘶𝘵𝘰-𝘥𝘦𝘭𝘦𝘵𝘦𝘥 𝘢𝘧𝘵𝘦𝘳 5 𝘔𝘪𝘯𝘶𝘵𝘦𝘴 𝘵𝘰 𝘈𝘷𝘰𝘪𝘥 𝘊𝘰𝘱𝘺𝘳𝘪𝘨𝘩𝘵 𝘐𝘴𝘴𝘶𝘦𝘴 & 𝘋𝘰𝘯𝘵 𝘧𝘰𝘳𝘨𝘦𝘵 𝘵𝘰 𝘍𝘰𝘳𝘸𝘢𝘳𝘥 𝘵𝘩𝘦 𝘧𝘪𝘭𝘦 𝘵𝘰 𝘚𝘢𝘷𝘦𝘥 𝘔𝘦𝘴𝘴𝘢𝘨𝘦𝘴 𝘣𝘦𝘧𝘰𝘳𝘦 𝘋𝘦𝘭𝘦𝘵𝘦.!\n\n{f_caption}",
                         protect_content=True if ident == "filep" else False,
@@ -480,9 +480,13 @@ async def cb_handler(client: Client, query: CallbackQuery):
                 await msg1.delete()
                 await msg.delete()
                 del msg1, msg
+            except UserIsBlocked:
+                await query.answer(url=f"https://t.me/{temp.U_NAME}?start={ident}_{file_id}")
+            except PeerIdInvalid:
+                await query.answer(url=f"https://t.me/{temp.U_NAME}?start={ident}_{file_id}")
             except Exception as e:
-                logger.exception(e, exc_info=True)
-                await query.answer(f"Encountering Issues", True)
+                await query.answer(url=f"https://t.me/{temp.U_NAME}?start={ident}_{file_id}")
+
         else:
             return await query.answer(f"😁 𝙷𝙴𝙻𝙻𝙾, {query.from_user.first_name}! {BTN_LOCK_TEXT}", show_alert=True)
            
