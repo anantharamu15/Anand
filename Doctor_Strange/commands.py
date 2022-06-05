@@ -242,8 +242,7 @@ async def start(client, message):
         file_id=file_id,
         caption=f_caption,        
         protect_content=True if pre == 'filep' else False,
-        invite_link = await client.create_chat_invite_link(int(AUTH_CHANNEL)),
-        reply_markup=InlineKeyboardMarkup([[ InlineKeyboardButton('🚀 𝙾𝚄𝚁 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 🚀', url=invite_link.invite_link) ]])                            
+        reply_markup=InlineKeyboardMarkup([[ InlineKeyboardButton('🚀 𝙾𝚄𝚁 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 🚀', url='https://t.me/mkn_bots_updates') ]])                            
         )
     
     
