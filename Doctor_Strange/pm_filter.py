@@ -521,7 +521,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             protect_content=True if ident == 'checksubp' else False
         )
     elif query.data == "pages":
-        await query.answer("കൗതുകം ലേശം കൂടുതലാണല്ലേ 👀", show_alert=True)
+        await query.answer("😁 Curiosity is a little more, isn't it? 👀", show_alert=True)
     elif query.data == "start":
         buttons = [[
             InlineKeyboardButton('➕ 𝙰𝙳𝙳 𝙼𝙴 𝚃𝙾 𝚈𝙾𝚄𝚁 𝙶𝚁𝙾𝚄𝙿 ➕', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
@@ -534,7 +534,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await query.message.edit_text(
-            text=script.START_TXT.format(mention = query.from_user.mention if query.from_user else query.chat.title, bot_name = temp.B_NAME),
+            text=START_TXT.format(mention = query.from_user.mention if query.from_user else query.chat.title, bot_name = temp.B_NAME),
             reply_markup=reply_markup,
             parse_mode='html'
         )
