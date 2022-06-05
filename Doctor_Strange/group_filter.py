@@ -475,7 +475,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
                        # ]
                    # )
              #   )
-                await query.answer('Check Out The Chat',show_alert=True)
+                await query.answer('Check Out The Chat')
                 await asyncio.sleep(IMDB_DELET_TIME)
                 #await msg1.delete()
                 await msg.delete()
