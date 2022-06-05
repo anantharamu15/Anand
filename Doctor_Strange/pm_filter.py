@@ -130,20 +130,7 @@ async def next_page(bot, query):
                     text=f"[{get_size(file.file_size)}] {file.file_name}", callback_data=f'pfiles#{file.file_id}'
                 ),
             ]
-            for file in files
-        ]
-    else:
-        btn = [
-            [
-                InlineKeyboardButton(
-                    text=f"{file.file_name}", callback_data=f'pfiles#{file.file_id}'
-                ),
-                InlineKeyboardButton(
-                    text=f"{get_size(file.file_size)}",
-                    callback_data=f'pfiles_#{file.file_id}',
-                ),
-            ]
-            for file in files
+            for pfile in files        
         ]
     btn.insert(0, 
         [
@@ -197,7 +184,7 @@ async def advantage_spoll_choker(bot, query):
         return await query.answer("okDa", show_alert=True)
     if movie_ == "close_spellcheck":
         return await query.message.delete()
-    movies = SPELL_CHECK.get(query.message.reply_to_message.message_id)
+    movies = SPELL_CHECK.get(query.message.message_id)
     if not movies:
         return await query.answer("You are clicking on an old button which is expired.", show_alert=True)
     movie = movies[(int(movie_))]
