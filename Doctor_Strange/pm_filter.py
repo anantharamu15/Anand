@@ -232,7 +232,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         except Exception as e:
             await query.answer(url=f"https://t.me/{temp.U_NAME}?start={ident}_{file_id}")
 
-    elif query.data.startswith("checksub"):
+    elif query.data.startswith("pchecksub"):
         if AUTH_CHANNEL and not await is_subscribed(client, query):
             await query.answer("I Like Your Smartness, But Don't Be Oversmart 😒", show_alert=True)
             return
@@ -285,7 +285,7 @@ async def auto_filter(client, msg, spoll=False):
         message = msg.message.reply_to_message  # msg will be callback query
         search, files, offset, total_results = spoll
     #pre = 'filep' if settings['file_secure'] else 'pfile'
-    pre = 'filep' else 'checksub'
+    pre = 'filep' else 'pchecksub'
     if settings["button"]:
         btn = [
             [
