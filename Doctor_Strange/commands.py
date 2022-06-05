@@ -18,10 +18,6 @@ logger = logging.getLogger(__name__)
 
 BATCH_FILES = {}
 
-
-BTN = InlineKeyboardMarkup([[ InlineKeyboardButton('🚀 𝙾𝚄𝚁 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 🚀', url=invite_link.invite_link) ]])
-                    
-
 @Client.on_message(filters.command("start"))
 async def start(client, message):
     if message.chat.type in ['group', 'supergroup']:
@@ -240,15 +236,16 @@ async def start(client, message):
             logger.exception(e)
             f_caption=f_caption
     if f_caption is None:
-        f_caption = f"{files.file_name}",
-        invite_link = await client.create_chat_invite_link(int(AUTH_CHANNEL))
+        f_caption = f"{files.file_name}"        
     await client.send_cached_media(
         chat_id=message.from_user.id,
         file_id=file_id,
         caption=f_caption,        
         protect_content=True if pre == 'filep' else False,
-        reply_markup=InlineKeyboardMarkup([[ InlineKeyboardButton('🚀 𝙾𝚄𝚁 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 🚀', url=invite_link.invite_link) ]])
+        reply_markup=BTN
         )
+    invite_link = await client.create_chat_invite_link(int(AUTH_CHANNEL))
+    BTN = InlineKeyboardMarkup([[ InlineKeyboardButton('🚀 𝙾𝚄𝚁 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 🚀', url=invite_link.invite_link) ]])        
                     
 
 @Client.on_message(filters.command('channel') & filters.user(ADMINS))
