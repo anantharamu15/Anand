@@ -4,7 +4,7 @@ from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from pyrogram.errors.exceptions.bad_request_400 import MessageTooLong, PeerIdInvalid
 from pyrogram.errors import UserNotParticipant
-from info import ADMINS, LOG_CHANNEL, SUPPORT_CHAT, MELCOW_NEW_USERS, AUTH_CHANNEL
+from info import ADMINS, LOG_CHANNEL, SUPPORT_CHAT, MELCOW_NEW_USERS, AUTH_CHANNEL, WELCOME, GOOD_BYE
 from Cluster.users_chats_db import db
 from Cluster.ia_filterdb import Media
 from utils import get_size, temp, get_settings
@@ -54,7 +54,7 @@ async def save_group(bot, message):
                         await (temp.MELCOW['welcome']).delete()
                     except:
                         pass
-                temp.MELCOW['welcome'] = await message.reply(f"<b>Hey , {u.mention}, Welcome to {message.chat.title}</b>")
+                temp.MELCOW['welcome'] = await message.reply(WELCOME.format(user_mention = u.mention, chat_name = message.chat.title)
 
 
 @Client.on_message(filters.command('leave') & filters.user(ADMINS))
