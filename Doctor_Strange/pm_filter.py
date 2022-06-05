@@ -958,31 +958,23 @@ async def manual_filters(client, message, text=False):
                 try:
                     if fileid == "None":
                         if btn == "[]":
-                            await client.send_message(group_id, reply_text, disable_web_page_preview=True)
+                            su = await client.send_message(group_id, reply_text, disable_web_page_preview=True)
+                            await asyncio.sleep(15)
+                            await su.delete()
                         else:
                             button = eval(btn)
-                            await client.send_message(
-                                group_id,
-                                reply_text,
-                                disable_web_page_preview=True,
-                                reply_markup=InlineKeyboardMarkup(button),
-                                reply_to_message_id=reply_id
-                            )
+                            kurup = await client.send_message(group_id, reply_text, disable_web_page_preview=True, reply_markup=InlineKeyboardMarkup(button), reply_to_message_id=reply_id)
+                            await asyncio.sleep(15)
+                            await kurup.delete()
                     elif btn == "[]":
-                        await client.send_cached_media(
-                            group_id,
-                            fileid,
-                            caption=reply_text or "",
-                            reply_to_message_id=reply_id
-                        )
+                        dhamu = await client.send_cached_media(group_id, fileid, caption=reply_text or "", reply_to_message_id=reply_id)
+                        await asyncio.sleep(15)
+                        await dhamu.delete()
                     else:
                         button = eval(btn)
-                        await message.reply_cached_media(
-                            fileid,
-                            caption=reply_text or "",
-                            reply_markup=InlineKeyboardMarkup(button),
-                            reply_to_message_id=reply_id
-                        )
+                        ramu = await message.reply_cached_media(fileid, caption=reply_text or "", reply_markup=InlineKeyboardMarkup(button), reply_to_message_id=reply_id)
+                        await asyncio.sleep(15)
+                        await ramu.delete()
                 except Exception as e:
                     logger.exception(e)
                 break
