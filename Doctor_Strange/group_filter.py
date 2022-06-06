@@ -447,11 +447,8 @@ async def cb_handler(client: Client, query: CallbackQuery):
                 if AUTH_CHANNEL and not await is_subscribed(client, query):
                     await query.answer(url=f"https://t.me/{temp.U_NAME}?start={ident}_{file_id}")
                     return
-                #elif settings['botpm']:
-                    #await query.answer(url=f"https://t.me/{temp.U_NAME}?start={ident}_{file_id}")
-                    #return
                 else:
-                    ms = await client.send_cached_media(
+                    msg = await client.send_cached_media(
                         chat_id=CHAT_ID,
                         file_id=file_id,
                         caption=f"Hey 👋 {query.from_user.mention}\n\n{f_caption}",
@@ -469,7 +466,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
                     reply_markup=InlineKeyboardMarkup(
                         [
                             [
-                                InlineKeyboardButton("🚀 𝐂𝐥𝐢𝐜𝐤 𝐇𝐞𝐫𝐞 𝐭𝐨 𝐆𝐞𝐭 𝐅𝐢𝐥𝐞 🚀", url = ms.link)
+                                InlineKeyboardButton("🚀 𝐂𝐥𝐢𝐜𝐤 𝐇𝐞𝐫𝐞 𝐭𝐨 𝐆𝐞𝐭 𝐅𝐢𝐥𝐞 🚀", url = msg.link)
                             ],
                             [
                                 InlineKeyboardButton("😔 𝐂𝐚𝐧'𝐭 𝐕𝐢𝐞𝐰 𝐅𝐢𝐥𝐞 ❓ 𝐂𝐥𝐢𝐜𝐤 𝐇𝐞𝐫𝐞 🤩", url = f"{CH_LINK}")
@@ -477,12 +474,8 @@ async def cb_handler(client: Client, query: CallbackQuery):
                         ]
                     )
                 )
-                await query.answer('Check Out The Chat')
                 await asyncio.sleep(IMDB_DELET_TIME)
-                #await msg1.delete()
                 await msg.delete()
-                #del msg1, msg
-                #del msg
             except UserIsBlocked:
                 await query.answer(url=f"https://t.me/{temp.U_NAME}?start={ident}_{file_id}")
             except PeerIdInvalid:
