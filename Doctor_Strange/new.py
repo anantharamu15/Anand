@@ -27,6 +27,8 @@ BUTTONS = {}
 SPELL_CHECK = {}
 
 
+# # ---------- 🔘 [ | 𝗕𝗢𝗧 𝗣𝗠 𝗙𝗜𝗟𝗧𝗘𝗥𝗦 | ] 🔘 ---------- # #
+
 
 @Client.on_message(filters.private & filters.text & ~filters.edited & filters.incoming)
 async def give_filter(client,message):
@@ -34,7 +36,9 @@ async def give_filter(client,message):
     if k == False:
         await auto_filter(client, message)   
 
-#➡️next button setup
+
+# # ---------- 🔘 [ | NEXT | ] 🔘 ---------- # #
+
 
 @Client.on_callback_query(filters.regex(r"^pnext"))
 async def next_page(bot, query):
@@ -111,10 +115,8 @@ async def next_page(bot, query):
     await query.answer()
 
 
-
-
-
-#🚀callbackquery 
+# # ---------- 🔘 [ | CALLBACKQUERY | ] 🔘 ---------- # #
+ 
 
 @Client.on_callback_query()
 async def cb_handler(client: Client, query: CallbackQuery):
@@ -204,7 +206,9 @@ async def cb_handler(client: Client, query: CallbackQuery):
     elif query.data == "pages":
         await query.answer()
 
-#🤖Aoutofiler session 💥  
+
+# # ---------- 🔘 [ | MAIN FUNCTION | ] 🔘 ---------- # #
+
                
 async def auto_filter(client, msg, spoll=False):
     if not spoll:
@@ -309,7 +313,8 @@ async def auto_filter(client, msg, spoll=False):
     if spoll:
         await msg.message.delete()
 
-#🔍spelling mod
+
+# # ---------- 🔘 [ | SPELL CHECK | ] 🔘 ---------- # #
        
 
 async def advantage_spell_chok(msg):
@@ -359,7 +364,6 @@ async def advantage_spell_chok(msg):
     btn.append([InlineKeyboardButton(text="Close", callback_data=f'spolling#{user}#close_spellcheck')])
     await msg.reply("I couldn't find anything related to that\nDid you mean any one of these?", reply_markup=InlineKeyboardMarkup(btn))
     
-
 @Client.on_callback_query(filters.regex(r"^spolling"))
 async def advantage_spoll_choker(bot, query):
     _, user, movie_ = query.data.split('#')
