@@ -472,8 +472,8 @@ async def cb_handler(client: Client, query: CallbackQuery):
                                 InlineKeyboardButton("😔 𝐂𝐚𝐧'𝐭 𝐕𝐢𝐞𝐰 𝐅𝐢𝐥𝐞 ❓ 𝐂𝐥𝐢𝐜𝐤 𝐇𝐞𝐫𝐞 🤩", url = f"{CH_LINK}")
                             ]
                         ]
+                      )
                     )
-                )
                 await asyncio.sleep(IMDB_DELET_TIME)
                 await msg.delete()
             except UserIsBlocked:
