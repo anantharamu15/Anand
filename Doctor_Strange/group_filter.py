@@ -8,7 +8,7 @@ import pyrogram
 from Cluster.connections_mdb import active_connection, all_connections, delete_connection, if_active, make_active, \
     make_inactive
 from info import ADMINS, AUTH_CHANNEL, AUTH_USERS, CUSTOM_FILE_CAPTION, AUTH_GROUPS, P_TTI_SHOW_OFF, IMDB, \
-    SINGLE_BUTTON, SPELL_CHECK_REPLY, IMDB_TEMPLATE, CH_FILTER, CH_LINK, IMDB_DELET_TIME, START_TXT, BTN_LOCK_TEXT
+    SINGLE_BUTTON, SPELL_CHECK_REPLY, IMDB_TEMPLATE, CH_FILTER, CH_LINK, IMDB_DELET_TIME, START_TXT, BTN_LOCK_TEXT, CHAT_ID
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 from pyrogram import Client, filters
 from pyrogram.errors import FloodWait, UserIsBlocked, MessageNotModified, PeerIdInvalid
@@ -100,7 +100,7 @@ async def give_filter(client,message):
             await auto_filter(client, message)  
 
 
-@Client.on_callback_query(filters.regex(r"^next"))
+@Client.on_callback_query(filters.regex(r"^gnext"))
 async def next_page(bot, query):
     ident, req, key, offset = query.data.split("_")
     if int(req) not in [query.from_user.id, 0]:
@@ -127,7 +127,7 @@ async def next_page(bot, query):
         btn = [
             [
                 InlineKeyboardButton(
-                    text=f"[{get_size(file.file_size)}] {file.file_name}", callback_data=f'files#{file.file_id}'
+                    text=f"[{get_size(file.file_size)}] {file.file_name}", callback_data=f'gfiles#{file.file_id}'
                 ),
             ]
             for file in files
@@ -136,11 +136,11 @@ async def next_page(bot, query):
         btn = [
             [
                 InlineKeyboardButton(
-                    text=f"{file.file_name}", callback_data=f'files#{file.file_id}'
+                    text=f"{file.file_name}", callback_data=f'gfiles#{file.file_id}'
                 ),
                 InlineKeyboardButton(
                     text=f"{get_size(file.file_size)}",
-                    callback_data=f'files_#{file.file_id}',
+                    callback_data=f'gfiles_#{file.file_id}',
                 ),
             ]
             for file in files
@@ -165,20 +165,20 @@ async def next_page(bot, query):
         off_set = offset - 10
     if n_offset == 0:
         btn.append(
-            [InlineKeyboardButton("🔙 𝙱𝙰𝙲𝙺", callback_data=f"next_{req}_{key}_{off_set}"),
+            [InlineKeyboardButton("🔙 𝙱𝙰𝙲𝙺", callback_data=f"gnext_{req}_{key}_{off_set}"),
              InlineKeyboardButton(f"📄 𝙿𝙰𝚂𝙶𝙴𝚂 {round(int(offset) / 10) + 1} / {round(total / 10)}",
                                   callback_data="pages")]
         )
     elif off_set is None:
         btn.append(
             [InlineKeyboardButton(f"📄 {round(int(offset) / 10) + 1} / {round(total / 10)}", callback_data="pages"),
-             InlineKeyboardButton("𝙽𝙴𝚇𝚃 ➡️", callback_data=f"next_{req}_{key}_{n_offset}")])
+             InlineKeyboardButton("𝙽𝙴𝚇𝚃 ➡️", callback_data=f"gnext_{req}_{key}_{n_offset}")])
     else:
         btn.append(
             [
-                InlineKeyboardButton("🔙 𝙱𝙰𝙲𝙺", callback_data=f"next_{req}_{key}_{off_set}"),
+                InlineKeyboardButton("🔙 𝙱𝙰𝙲𝙺", callback_data=f"gnext_{req}_{key}_{off_set}"),
                 InlineKeyboardButton(f"📄 {round(int(offset) / 10) + 1} / {round(total / 10)}", callback_data="pages"),
-                InlineKeyboardButton("𝙽𝙴𝚇𝚃 ➡️", callback_data=f"next_{req}_{key}_{n_offset}")
+                InlineKeyboardButton("𝙽𝙴𝚇𝚃 ➡️", callback_data=f"gnext_{req}_{key}_{n_offset}")
             ],
         )
     try:
@@ -403,7 +403,8 @@ async def cb_handler(client: Client, query: CallbackQuery):
             alert = alerts[int(i)]
             alert = alert.replace("\\n", "\n").replace("\\t", "\t")
             await query.answer(alert, show_alert=True)
-    if query.data.startswith("file"):
+            
+    if query.data.startswith("gfile"):
         clicked = query.from_user.id
         try:
             typed = query.message.reply_to_message.from_user.id
@@ -412,6 +413,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             pass
         if int(clicked) == typed:
             ident, file_id = query.data.split("#")
+            ident = "filep" if ident == "gfilep" else "file"
             files_ = await get_file_details(file_id)
             if not files_:
                 return await query.answer('No such file exist.')
@@ -450,7 +452,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
                     #return
                 else:
                     ms = await client.send_cached_media(
-                        chat_id=query.from_user.id,
+                        chat_id=CHAT_ID,
                         file_id=file_id,
                         caption=f"Hey 👋 {query.from_user.mention}\n\n{f_caption}",
                         protect_content=True if ident == "filep" else False,
@@ -480,7 +482,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
                 #await msg1.delete()
                 await msg.delete()
                 #del msg1, msg
-                del msg
+                #del msg
             except UserIsBlocked:
                 await query.answer(url=f"https://t.me/{temp.U_NAME}?start={ident}_{file_id}")
             except PeerIdInvalid:
@@ -753,7 +755,6 @@ async def cb_handler(client: Client, query: CallbackQuery):
             await query.message.edit_reply_markup(reply_markup)
     await query.answer('Piracy Is Crime')
 
-@Client.on_message(filters.group)
 async def auto_filter(client, msg, spoll=False):
     if not spoll:
         message = msg
@@ -775,7 +776,7 @@ async def auto_filter(client, msg, spoll=False):
         settings = await get_settings(msg.message.chat.id)
         message = msg.message.reply_to_message  # msg will be callback query
         search, files, offset, total_results = spoll
-    pre = 'filep' if settings['file_secure'] else 'file'
+    pre = 'gfilep' if settings['file_secure'] else 'gfile'
     if settings["button"]:
         btn = [
             [
