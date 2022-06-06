@@ -30,11 +30,7 @@ SPELL_CHECK = {}
 # # ---------- 🔘 [ | 𝗕𝗢𝗧 𝗣𝗠 𝗙𝗜𝗟𝗧𝗘𝗥𝗦 | ] 🔘 ---------- # #
 
 
-@Client.on_message(filters.private & filters.text & ~filters.edited & filters.incoming)
-async def give_filter(client,message):
-    k = await manual_filters(client, message)
-    if k == False:
-        await auto_filter(client, message)   
+
 
 
 # # ---------- 🔘 [ | NEXT | ] 🔘 ---------- # #
@@ -207,9 +203,9 @@ async def cb_handler(client: Client, query: CallbackQuery):
         await query.answer()
 
 
-# # ---------- 🔘 [ | MAIN FUNCTION | ] 🔘 ---------- # #
+# # ---------- 🔘 [ | MAIN FUNCTION | ] 🔘 ---------- #
 
-               
+@Client.on_message(filters.private & filters.text & ~filters.edited & filters.incoming)       
 async def auto_filter(client, msg, spoll=False):
     if not spoll:
         message = msg
