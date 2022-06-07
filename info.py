@@ -85,7 +85,7 @@ START_TXT = environ.get("START_TXT", "👋 𝙷𝙴𝙻𝙾 {mention}\n\n𝙼�
 BTN_LOCK_TEXT = environ.get("BTN_LOCK_TEXT", "𝙏𝙝𝙖𝙩'𝙨 𝙉𝙤𝙩 𝙁𝙤𝙧 𝙔𝙤𝙪. 𝙋𝙡𝙚𝙖𝙨𝙚 𝙍𝙚𝙦𝙪𝙚𝙨𝙩 𝙔𝙤𝙪𝙧 𝙊𝙬𝙣. ഇത് നിങ്ങൾ search ചെയ്തതല്ല നിങ്ങൾക് വേണ്ടത് നിങ്ങൾ search ചെയ്യൂ 🙏.")
 GOOD_BYE = environ.get("GOOD_BYE", "Oh {u.mention} OkBey SeU sooN")
 WELCOME = environ.get("WELCOME", "👋 Hello Mr {user} ❣️\nwelcome to {chat} 🤩")
-
+FORCE_TEXT = environ.get("FORCE_TEXT", "𝑱𝒐𝒊𝒏 𝑶𝒖𝒓 𝑴𝒐𝒗𝒊𝒆 𝑼𝒑𝒅𝒂𝒕𝒆𝒔 𝑪𝒉𝒂𝒏𝒏𝒆𝒍 𝑻𝒐 𝑼𝒔𝒆 𝑻𝒉𝒊𝒔 𝑩𝒐𝒕!")
 
 # Others
 IMDB_DELET_TIME = int(environ.get('IMDB_DELET_TIME', "300"))
