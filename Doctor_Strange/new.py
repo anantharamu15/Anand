@@ -72,7 +72,6 @@ async def cb_handler(client: Client, query: CallbackQuery):
                 f_caption = f"{files.file_name}"
                 size = f"{files.file_size}"
                 mention = f"{query.from_user.mention}"
-
             try:
             if AUTH_CHANNEL and not await is_subscribed(client, query):
                 await query.answer(url=f"https://t.me/{temp.U_NAME}?start={ident}_{file_id}")
