@@ -28,6 +28,16 @@ SPELL_CHECK = {}
 
 
 # # ---------- 🔘 [ | 𝗕𝗢𝗧 𝗣𝗠 𝗙𝗜𝗟𝗧𝗘𝗥𝗦 | ] 🔘 ---------- # #
+
+@Client.on_message(filters.private & filters.text & ~filters.edited & filters.incoming)
+async def give_filter(client, message):
+    k = await manual_filters(client, message)
+    if k == False:
+        await auto_filter(client, message)
+
+
+
+# # ---------- 🔘 [ | CALLBACKQUERY NEXT | ] 🔘 ---------- # #
   
 @Client.on_callback_query(filters.regex(r"^pnext"))
 async def next_page(bot, query):
@@ -240,22 +250,22 @@ async def advantage_spell_chok(msg):
     btn = [[
                 InlineKeyboardButton(
                     text=movie.strip(),
-                    callback_data=f"spolling#{user}#{k}",
+                    callback_data=f"pspolling#{user}#{k}",
                 )
             ] for k, movie in enumerate(movielist)]
     btn.append([InlineKeyboardButton(text="Close", callback_data=f'spolling#{user}#close_spellcheck')])
     await msg.reply("I couldn't find anything related to that\nDid you mean any one of these?", reply_markup=InlineKeyboardMarkup(btn))
     
-@Client.on_callback_query(filters.regex(r"^spolling"))
+@Client.on_callback_query(filters.regex(r"^pspolling"))
 async def advantage_spoll_choker(bot, query):
     _, user, movie_ = query.data.split('#')
     if int(user) != 0 and query.from_user.id != int(user):
         return await query.answer("okDa", show_alert=True)
     if movie_  == "close_spellcheck":
         return await query.message.delete()
-    movies = SPELL_CHECK.get(query.message.reply_to_message.message_id)
+    movies = SPELL_CHECK.get(query.message_id)
     if not movies:
-        return await query.answer("You are clicking on an old button which is expired.", show_alert=True)
+        return await query.answer("Sorry Dude this feature not working in PM.", show_alert=True)
     movie = movies[(int(movie_))]
     await query.answer('Checking for Movie in database...')
     k = await manual_filters(bot, query.message, text=movie)
