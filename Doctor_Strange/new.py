@@ -33,6 +33,7 @@ SPELL_CHECK = {}
 async def cb_handler(client: Client, query: CallbackQuery):
     if query.data == "close_data":
         await query.message.delete()
+
     if query.data.startswith("pfile"):
         clicked = query.from_user.id
         try:
@@ -42,7 +43,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             pass
         if int(clicked) == typed:
             ident, file_id = query.data.split("#")
-            ident = "filep" if ident == "gfilep" else "file"
+            ident = "pfilep" if ident == "pfilep" else "pfile"
             files_ = await get_file_details(file_id)
             if not files_:
                 return await query.answer('No such file exist.')
@@ -183,29 +184,15 @@ async def auto_filter(client, msg, spoll=False):
             return
     else:
         message = msg.message.reply_to_message # msg will be callback query
-        search, files, offset, total_results = spoll
+        search, pfiles, offset, total_results = spoll
     if SINGLE_BUTTON:
         btn = [
             [
                 InlineKeyboardButton(
-                    text=f"[{get_size(file.file_size)}] {file.file_name}", callback_data=f'files#{file.file_id}'
+                    text=f"[{get_size(file.file_size)}] {file.file_name}", callback_data=f'pfiles#{file.file_id}'
                 ),
             ]
-            for file in files
-        ]
-    else:
-        btn = [
-            [
-                InlineKeyboardButton(
-                    text=f"{file.file_name}",
-                    callback_data=f'files#{file.file_id}',
-                ),
-                InlineKeyboardButton(
-                    text=f"{get_size(file.file_size)}",
-                    callback_data=f'files_#{file.file_id}',
-                ),
-            ]
-            for file in files
+            for pfile in pfiles        
         ]
 
     if offset != "":
