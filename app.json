@@ -114,12 +114,12 @@
             "value": "𝙏𝙝𝙖𝙩'𝙨 𝙉𝙤𝙩 𝙁𝙤𝙧 𝙔𝙤𝙪. 𝙋𝙡𝙚𝙖𝙨𝙚 𝙍𝙚𝙦𝙪𝙚𝙨𝙩 𝙔𝙤𝙪𝙧 𝙊𝙬𝙣. ഇത് നിങ്ങൾ search ചെയ്തതല്ല നിങ്ങൾക് വേണ്ടത് നിങ്ങൾ search ചെയ്യൂ 🙏.",
             "required": false
         },
-        "WELCOME": {
+        "FORCE_TEXT": {
             "description": "custom force sub text (use ** = bold / use ``=  mono)",
             "value": "**𝑱𝒐𝒊𝒏 𝑶𝒖𝒓 𝑴𝒐𝒗𝒊𝒆 𝑼𝒑𝒅𝒂𝒕𝒆𝒔 𝑪𝒉𝒂𝒏𝒏𝒆𝒍 𝑻𝒐 𝑼𝒔𝒆 𝑻𝒉𝒊𝒔 𝑩𝒐𝒕!**",
             "required": false
         },
-        "FORCE_TEXT": {
+        "WELCOME": {
             "description": "custom group welcome messege (new user neme use this code= {user} / your group name use this code= {chat})",
             "value": "👋 Hello Mr {user} ❣️\n\nwelcome to {chat} 🤩",
             "required": false        
