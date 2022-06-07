@@ -406,12 +406,7 @@ async def settings(client, message):
                     InlineKeyboardButton('𝙵𝙸𝙻𝚃𝙴𝚁 𝙱𝚄𝚃𝚃𝙾𝙽',
                                          callback_data=f'setgs#button#{settings["button"]}#{str(grp_id)}'),
                     InlineKeyboardButton('𝚂𝙸𝙽𝙶𝙻𝙴' if settings["button"] else '𝙳𝙾𝚄𝙱𝙻𝙴',
-                                         callback_data=f'setgs#button#{settings["button"]}#{str(grp_id)}')
-                #],
-                #[
-                    #InlineKeyboardButton('𝙱𝙾𝚃 𝙿𝙼', callback_data=f'setgs#botpm#{settings["botpm"]}#{str(grp_id)}'),
-                   # InlineKeyboardButton('✅ 𝚈𝙴𝚂' if settings["botpm"] else '❌ 𝙽𝙾',
-                                        # callback_data=f'setgs#botpm#{settings["botpm"]}#{str(grp_id)}')
+                                         callback_data=f'setgs#button#{settings["button"]}#{str(grp_id)}')                
                 ],
                 [
                     InlineKeyboardButton('𝙿𝚁𝙾𝚃𝙴𝙲𝚃 𝙲𝙾𝙽𝚃𝙴𝙽𝚃',
