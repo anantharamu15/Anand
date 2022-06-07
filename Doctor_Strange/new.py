@@ -158,6 +158,7 @@ async def next_page(bot, query):
 async def auto_filter(client, msg, spoll=False):
     if not spoll:
         message = msg
+        settings = await get_settings(message.chat.id)
         if re.findall("((^\/|^,|^!|^\.|^[\U0001F600-\U000E007F]).*)", message.text):
             return
         if 2 < len(message.text) < 100:
@@ -173,7 +174,7 @@ async def auto_filter(client, msg, spoll=False):
     else:
         message = msg.message.reply_to_message # msg will be callback query
         search, files, offset, total_results = spoll
-    pre = 'pfilep' if 'pfile'
+    pre = 'pfilep' if settings['file_secure'] else 'pfile'
     if SINGLE_BUTTON:
         btn = [
             [
