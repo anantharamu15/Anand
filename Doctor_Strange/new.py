@@ -56,33 +56,33 @@ async def cb_handler(client: Client, query: CallbackQuery):
             settings = await get_settings(query.message.chat.id)
             if CUSTOM_FILE_CAPTION:
                 try:
-                f_caption=CUSTOM_FILE_CAPTION.format(file_name=title, file_size=size, file_caption=f_caption)
-            except Exception as e:
-                logger.exception(e)
-            f_caption=f_caption
-        if f_caption is None:
-            f_caption = f"{files.file_name}"
+                    f_caption=CUSTOM_FILE_CAPTION.format(file_name=title, file_size=size, file_caption=f_caption)
+                except Exception as e:
+                    logger.exception(e)
+                f_caption=f_caption
+            if f_caption is None:
+                f_caption = f"{files.file_name}"
             
-        try:
-            if AUTH_CHANNEL and not await is_subscribed(client, query):
+            try:
+                if AUTH_CHANNEL and not await is_subscribed(client, query):
+                    await query.answer(url=f"https://t.me/{temp.U_NAME}?start={file_id}")
+                    return
+                elif P_TTI_SHOW_OFF:
+                    await query.answer(url=f"https://t.me/{temp.U_NAME}?start={file_id}")
+                    return
+                else:
+                    await client.send_cached_media(
+                        chat_id=query.from_user.id,
+                        file_id=file_id,
+                        caption=f_caption
+                        )
+                    await query.answer('Check PM, I have sent files in pm')
+            except UserIsBlocked:
+                await query.answer('Unblock the bot mahn !',show_alert = True)
+            except PeerIdInvalid:
                 await query.answer(url=f"https://t.me/{temp.U_NAME}?start={file_id}")
-                return
-            elif P_TTI_SHOW_OFF:
-                await query.answer(url=f"https://t.me/{temp.U_NAME}?start={file_id}")
-                return
-            else:
-                await client.send_cached_media(
-                    chat_id=query.from_user.id,
-                    file_id=file_id,
-                    caption=f_caption
-                    )
-                await query.answer('Check PM, I have sent files in pm')
-        except UserIsBlocked:
-            await query.answer('Unblock the bot mahn !',show_alert = True)
-        except PeerIdInvalid:
-            await query.answer(url=f"https://t.me/{temp.U_NAME}?start={file_id}")
-        except Exception as e:
-            await query.answer(url=f"https://t.me/{temp.U_NAME}?start={file_id}")   
+            except Exception as e:
+                await query.answer(url=f"https://t.me/{temp.U_NAME}?start={file_id}")   
             
 
 # # ---------- 🔘 [ | NEXT | ] 🔘 ---------- # #
