@@ -172,15 +172,16 @@ async def auto_filter(client, msg, spoll=False):
             return
     else:
         message = msg.message.reply_to_message # msg will be callback query
-        search, pfiles, offset, total_results = spoll
+        search, files, offset, total_results = spoll
+    pre = 'pfilep' if settings['file_secure'] else 'pfile'
     if SINGLE_BUTTON:
         btn = [
             [
                 InlineKeyboardButton(
-                    text=f"[{get_size(file.file_size)}] {file.file_name}", callback_data=f'pfile#{file.file_id}'
+                    text=f"[{get_size(file.file_size)}] {file.file_name}", callback_data=f'{pre}#{file.file_id}'
                 ),
             ]
-            for pfile in files        
+            for file in files        
         ]
 
     if offset != "":
