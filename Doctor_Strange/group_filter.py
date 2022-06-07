@@ -455,14 +455,8 @@ async def cb_handler(client: Client, query: CallbackQuery):
                         protect_content=True if ident == "filep" else False,
                         reply_markup=InlineKeyboardMarkup([[ InlineKeyboardButton('🚀 𝙾𝚄𝚁 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 🚀', url='https://t.me/mkn_bots_updates') ]]) 
                     )
-                    msg = await query.message.edit(
-                        f'<b>Hey 👋{query.from_user.mention}\n'
-                        f'<b>📁 Yᴏuʀ Fɪʟᴇ ɪꜱ Rᴇᴀᴅʏ 👇\n\n'
-                        f'<b>↬ ғɪʟᴇ ɴᴀᴍᴇ: </b>{title}\n'
-                        f'<b>↬ sɪᴢᴇ:</b> {size}\n\n'
-                        f'𝘛𝘩𝘪𝘴 𝘍𝘪𝘭𝘦 𝘸𝘪𝘭𝘭 𝘣𝘦 𝘋𝘦𝘭𝘦𝘵𝘦𝘥 𝘪𝘯 {IMDB_DELET_TIME} seconds.!\nതാഴെ ഉള്ള click to download അമർത്തി പിന്നീട് വരുന്ന\nചാനലിൽ നിന്ന് file saved മെസ്സേജിലേക്ക് മാറ്റി download ചെയ്യുക \n⚠️ copyright കാരണം മൂവി 5mint ൽ delet ആകും ⚠️!',
-                        True,
-                        'html',
+                    msg1 = await query.message.edit(
+                        text=f"<b>Hey 👋{query.from_user.mention}\n<b>📁 Yᴏuʀ Fɪʟᴇ ɪꜱ Rᴇᴀᴅʏ 👇\n\n<b>↬ ғɪʟᴇ ɴᴀᴍᴇ: </b>{title}\n<b>↬ sɪᴢᴇ:</b> {size}\n\n𝘛𝘩𝘪𝘴 𝘍𝘪𝘭𝘦 𝘸𝘪𝘭𝘭 𝘣𝘦 𝘋𝘦𝘭𝘦𝘵𝘦𝘥 𝘪𝘯 {IMDB_DELET_TIME} seconds.!\nതാഴെ ഉള്ള click to download അമർത്തി പിന്നീട് വരുന്ന\nചാനലിൽ നിന്ന് file saved മെസ്സേജിലേക്ക് മാറ്റി download ചെയ്യുക \n⚠️ copyright കാരണം മൂവി 5mint ൽ delet ആകും ⚠️!",                                  
                         reply_markup=InlineKeyboardMarkup(
                              [[
                                InlineKeyboardButton("🚀 𝐂𝐥𝐢𝐜𝐤 𝐇𝐞𝐫𝐞 𝐭𝐨 𝐆𝐞𝐭 𝐅𝐢𝐥𝐞 🚀", url = msg.link)
