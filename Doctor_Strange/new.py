@@ -173,7 +173,7 @@ async def auto_filter(client, msg, spoll=False):
     else:
         message = msg.message.reply_to_message # msg will be callback query
         search, files, offset, total_results = spoll
-    pre = 'pfilep' if settings['file_secure'] else 'pfile'
+    pre = 'pfilep' if 'pfile'
     if SINGLE_BUTTON:
         btn = [
             [
