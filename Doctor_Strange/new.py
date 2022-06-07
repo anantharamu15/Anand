@@ -35,54 +35,43 @@ async def cb_handler(client: Client, query: CallbackQuery):
         await query.message.delete()
 
     if query.data.startswith("pfile"):
-        clicked = query.from_user.id
-        try:
-            typed = query.message.reply_to_message.from_user.id
-        except:
-            typed = query.from_user.id
-            pass
-        if int(clicked) == typed:
-            ident, file_id = query.data.split("#")
-            ident = "pfilep" if ident == "pfilep" else "pfile"
-            files_ = await get_file_details(file_id)
-            if not files_:
-                return await query.answer('No such file exist.')
-            files = files_[0]
-            title = files.file_name
-            size = get_size(files.file_size)
-            type = files.file_type
-            mention = query.from_user.mention
-            f_caption = files.caption
-            settings = await get_settings(query.message.chat.id)
-            if CUSTOM_FILE_CAPTION:
-                try:
-                    f_caption = CUSTOM_FILE_CAPTION.format(file_name='' if title is None else title,
-                                                           file_size='' if size is None else size,
-                                                           file_caption='' if f_caption is None else f_caption)
-
-                    buttons = [[
-                      InlineKeyboardButton('🔰 Main Group 🔰', url='https://t.me/mknmovies')
-                      ]]                                        
-                except Exception as e:
-                    logger.exception(e)
-                f_caption = f_caption
-                size = size
-                mention = mention
-            if f_caption is None:
-                f_caption = f"{files.file_name}"
-                size = f"{files.file_size}"
-                mention = f"{query.from_user.mention}"
+        ident, file_id = query.data.split("#")
+        files_ = await get_file_details(file_id)
+        if not files_:
+            return await query.answer('No such file exist.')
+        files = files_[0]
+        title = files.file_name
+        size = get_size(files.file_size)
+        f_caption = files.caption
+        settings = await get_settings(query.message.chat.id)
+        if CUSTOM_FILE_CAPTION:
             try:
+                f_caption = CUSTOM_FILE_CAPTION.format(file_name='' if title is None else title,
+                                                       file_size='' if size is None else size,
+                                                       file_caption='' if f_caption is None else f_caption)
+            except Exception as e:
+                logger.exception(e)
+            f_caption = f_caption
+        if f_caption is None:
+            f_caption = f"{files.file_name}"
+
+        try:
             if AUTH_CHANNEL and not await is_subscribed(client, query):
                 await query.answer(url=f"https://t.me/{temp.U_NAME}?start={ident}_{file_id}")
-                return          
+                return            
             else:
                 await client.send_cached_media(
                     chat_id=query.from_user.id,
                     file_id=file_id,
-                    caption=f_caption,                   
+                    caption=f_caption, 
                 )
-
+                await query.answer('Check PM, I have sent files in pm', show_alert=True)
+        except UserIsBlocked:
+            await query.answer('Unblock the bot mahn !', show_alert=True)
+        except PeerIdInvalid:
+            await query.answer(url=f"https://t.me/{temp.U_NAME}?start={ident}_{file_id}")
+        except Exception as e:
+            await query.answer(url=f"https://t.me/{temp.U_NAME}?start={ident}_{file_id}")
 
 
 
